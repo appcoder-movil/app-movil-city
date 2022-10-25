@@ -1,29 +1,28 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
-  const ({Key? key}) : super(key: key);
+  const RegisterPage ({Key? key}) : super(key: key);
 
   @override
-  State<> createState() => _State();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _State extends State<> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Image(image: AssetImage('assets/images/paisaje-urbano-logo.png'))
+              ],
+          ),
+        ),
+      ),
+    );
   }
 }
