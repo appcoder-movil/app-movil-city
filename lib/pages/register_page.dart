@@ -1,3 +1,4 @@
+import 'package:app_movil_city/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -75,19 +76,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       textStyle: TextStyle(fontSize: 16),
                     ),
                     onPressed: () {
-                      _onRegisterPageButtonClicked();
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                     child: const Text('Registrar'),
                   ),
                   const SizedBox(
                     height: 16.0,
                   ),
-                  Text(
-                    _data,
-                    style: const TextStyle(
-                      fontSize: 12, fontStyle: FontStyle.italic,
-                    ),
-                  )
                 ],
             ),
           ),

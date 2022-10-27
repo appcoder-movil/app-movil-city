@@ -1,4 +1,5 @@
 import 'package:app_movil_city/pages/register_page.dart';
+import 'package:app_movil_city/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const RegisterPage(),
+      home: const SplashPage(),
     );
   }
 }
