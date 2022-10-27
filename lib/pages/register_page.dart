@@ -30,60 +30,60 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Image(image: AssetImage('assets/images/paisaje-urbano-logo.png')),
-                  const SizedBox(
-                    height: 16.0,
+              children: [
+                const Image(image: AssetImage('assets/images/paisaje-urbano-logo.png')),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                TextFormField(
+                  controller: _name,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Usuario'),
+                  keyboardType: TextInputType.text,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                TextFormField(
+                  controller: _email,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Correo Electrónico'),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                TextFormField(
+                  controller: _password,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Contraseña'),
+                  keyboardType: TextInputType.text,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                TextFormField(
+                  controller: _confirm_password,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Confirmar Contraseña'),
+                  keyboardType: TextInputType.text,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                ElevatedButton(
+                  style: TextButton.styleFrom(
+                    textStyle: TextStyle(fontSize: 16),
                   ),
-                  TextFormField(
-                    controller: _name,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Usuario'),
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    controller: _email,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Correo Electrónico'),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    controller: _password,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Contraseña'),
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    controller: _confirm_password,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Confirmar Contraseña'),
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  ElevatedButton(
-                    style: TextButton.styleFrom(
-                      textStyle: TextStyle(fontSize: 16),
-                    ),
-                    onPressed: () {
+                  onPressed: () {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                    },
-                    child: const Text('Registrar'),
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                ],
+                  },
+                  child: const Text('Registrar'),
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+              ],
             ),
           ),
         ),

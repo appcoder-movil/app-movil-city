@@ -1,3 +1,4 @@
+import 'package:app_movil_city/pages/home_page.dart';
 import 'package:app_movil_city/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                     textStyle: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
-                    _onLoginPageButtonClicked();
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   child: const Text('Iniciar Sesión'),
                 ),

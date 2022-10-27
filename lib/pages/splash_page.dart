@@ -10,7 +10,10 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
 
- void initState(){
+  final String _data = "AppMobile City";
+  final String _version = "Ver 1.0.0";
+
+  void initState(){
    _closeSplashPage();
    super.initState();
  }
@@ -22,9 +25,24 @@ class _SplashPageState extends State<SplashPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Image(image: AssetImage('assets/images/paisaje-urbano-logo.png'),
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(image: AssetImage('assets/images/paisaje-urbano-logo.png')),
+              const SizedBox(
+                height: 16.0,
+              ),
+              Text('$_data', style: Theme.of(context).textTheme.headline5,),
+              const SizedBox(
+                height: 16.0,
+              ),
+              Text('$_version', style: Theme.of(context).textTheme.headline6,),
+            ],
+          ),
         ),
       ),
     );
