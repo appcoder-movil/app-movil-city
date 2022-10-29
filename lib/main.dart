@@ -2,7 +2,14 @@ import 'package:app_movil_city/pages/register_page.dart';
 import 'package:app_movil_city/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
