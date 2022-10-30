@@ -1,3 +1,4 @@
+import 'package:app_movil_city/models/user.dart';
 import 'package:app_movil_city/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +16,25 @@ class _RegisterPageState extends State<RegisterPage> {
   final _confirm_password=TextEditingController();
   String _data = "Información del usuario";
 
+  void _showMessage(String msg){
+    final scaffoldMsg = ScaffoldMessenger.of(context);
+    scaffoldMsg.showSnackBar(
+      SnackBar(content: Text(msg),
+      action: SnackBarAction(
+        label: 'Aceptar', onPressed: scaffoldMsg.hideCurrentSnackBar),
+      ),
+    );
+  }
+
   void _onRegisterPageButtonClicked(){
     setState(() {
-      _data="Información del usuario\nNombre: ${_name.text}\nCorreo Elactŕonico: ${_email.text}";
-    });
+      if(_password.text == _confirm_password.text){
+        var user = User(_name.text, _email.text, _password.text, '');
+      }else{
+        _showMessage('Las contraseñas DEBEN ser iguales.');
+      }
+    }
+    );
   }
 
   @override
