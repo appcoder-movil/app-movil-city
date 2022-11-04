@@ -1,5 +1,6 @@
 import 'package:app_movil_city/models/user.dart';
 import 'package:app_movil_city/pages/login_page.dart';
+import 'package:app_movil_city/repository/firebase_api.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -10,6 +11,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final FirebaseApi _firebaseApi=FirebaseApi();
 
   final _name=TextEditingController();
   final _email=TextEditingController();
@@ -27,10 +30,15 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _onRegisterPageButtonClicked(){
+  void saveUser(User user) async {
+    var result=await _firebaseApi.registerUser(user.email, user.password);
+  }
+
+  void _onRegisterButtonClicked(){
     setState(() {
       if(_password.text == _confirm_password.text){
-        var user = User(_name.text, _email.text, _password.text, '');
+        var user = User(_name.text, _email.text, _password.text);
+        saveUser(user);
       }else{
         _showMessage('Las contraseñas DEBEN ser iguales.');
       }
@@ -93,9 +101,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     textStyle: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
+                    _onRegisterButtonClicked();
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   },
-                  child: const Text('Registrar'),
+                  child: const Text('Registrarse'),
                 ),
                 const SizedBox(
                   height: 16.0,

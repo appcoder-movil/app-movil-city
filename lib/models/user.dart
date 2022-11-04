@@ -2,9 +2,8 @@ class User {
   var _name;
   var _email;
   var _password;
-  var _created_at;
 
-  User(this._name, this._email, this._password, this._created_at);
+  User(this._name, this._email, this._password);
 
   get name => _name;
 
@@ -22,12 +21,6 @@ class User {
 
   set password(value) {
     _password = value;
-  }
-
-  get created_at => _created_at;
-
-  set created_at(value) {
-    _created_at = value;
   }
 
 }
