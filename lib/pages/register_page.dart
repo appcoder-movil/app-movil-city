@@ -14,11 +14,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final FirebaseApi _firebaseApi=FirebaseApi();
 
-  final _name=TextEditingController();
   final _email=TextEditingController();
   final _password=TextEditingController();
   final _confirm_password=TextEditingController();
-  String _data = "Información del usuario";
 
   void _showMessage(String msg){
     final scaffoldMsg = ScaffoldMessenger.of(context);
@@ -32,13 +30,30 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void saveUser(User user) async {
     var result=await _firebaseApi.registerUser(user.email, user.password);
+    String msg='';
+    if(result=='invalid-email'){
+      msg='El correo electrónico está mal escrito.';
+    } else
+    if(result=='weak-password'){
+      msg='La contraseña debe tener al menos 6 carácteres alfanuméricos.';
+    } else
+    if(result=='email-already-in-use'){
+      msg='Ya existe una cuenta con ese correo electrónico.';
+    }else
+    if(result=='network-request-failed'){
+      msg='El servicio de internet/datos está fallando.';
+    } else
+      msg='Usuario registrado con éxito.';
+
+    _showMessage(msg);
   }
 
   void _onRegisterButtonClicked(){
     setState(() {
       if(_password.text == _confirm_password.text){
-        var user = User(_name.text, _email.text, _password.text);
+        var user = User(_email.text, _password.text);
         saveUser(user);
+        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
       }else{
         _showMessage('Las contraseñas DEBEN ser iguales.');
       }
@@ -57,15 +72,6 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Image(image: AssetImage('assets/images/paisaje-urbano-logo.png')),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                TextFormField(
-                  controller: _name,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Usuario'),
-                  keyboardType: TextInputType.text,
-                ),
                 const SizedBox(
                   height: 16.0,
                 ),
@@ -102,7 +108,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   onPressed: () {
                     _onRegisterButtonClicked();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   },
                   child: const Text('Registrarse'),
                 ),

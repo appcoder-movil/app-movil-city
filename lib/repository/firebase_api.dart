@@ -1,20 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseApi{
-  Future<bool> registerUser(String email, String password) async {
+
+  Future<String?> registerUser(String email, String password) async {
     try{
-      print("############## CREANDO USUARIO ###############");
       final credential=await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      return true;
+      print("Firebase API: USUARIO CREADO EXITOSAMENTE!!! =====>");
+      return credential.user?.uid;
     }
     on FirebaseAuthException catch(e){
-      print(e.code);
-      return false;
+      print('Firebase API: FirebaseAuthException ERROR CREANDO USUARIO!!! =====>: ${e.code}');
+      return e.code;
     }
-    catch(e){
-      print(e);
-      return false;
+    on FirebaseException catch(e){
+      print('Firebase API: FirebaseException ERROR CREANDO USUARIO!!! =====>: ${e.code}');
+      return e.code;
     }
   }
 }

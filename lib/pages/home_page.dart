@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Puntos de Información (POI)', style: Theme.of(context).textTheme.headline6,),
+              Text('Puntos de Interés (POI)', style: Theme.of(context).textTheme.headline6,),
               const SizedBox(
                 height: 16.0,
               ),
