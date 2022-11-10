@@ -4,6 +4,8 @@ class User {
 
   User(this._email, this._password);
 
+  User.Empty();
+
   get email => _email;
 
   set email(value) {

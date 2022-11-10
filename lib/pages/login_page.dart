@@ -1,5 +1,7 @@
+import 'package:app_movil_city/models/user.dart';
 import 'package:app_movil_city/pages/home_page.dart';
 import 'package:app_movil_city/pages/register_page.dart';
+import 'package:app_movil_city/repository/firebase_api.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,12 +14,65 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _email=TextEditingController();
   final _password=TextEditingController();
-  String _data = "Información del usuario";
+
+  User userLoad=User.Empty();
+
+  final FirebaseApi _firebaseApi=FirebaseApi();
+
+  @override
+
+  void initState(){
+    //_getUser();
+    super.initState();
+  }
+
+  _getUser() async {
+    //SharedPreferences prefs=await SharedPreferences.getInstance();
+    //Map<String, dynamic> userMap = jsonDecode(prefs.getString('user')!);
+    //userLoad=User.fromJson(userMap);
+  }
 
   void _onLoginPageButtonClicked(){
     setState(() {
-      _data="Información del usuario\nCorreo Elactŕonico: ${_email.text}";
+      //_data="Información del usuario\nCorreo Elactŕonico: ${_email.text}";
     });
+  }
+
+  void _showMsg(String msg){
+    final scaffoldMsg = ScaffoldMessenger.of(context);
+    scaffoldMsg.showSnackBar(
+      SnackBar(content: Text(msg),
+        action: SnackBarAction(
+            label: 'Aceptar', onPressed: scaffoldMsg.hideCurrentSnackBar),
+      ),
+    );
+  }
+
+  void _validateUser() async {
+    if(_email.text.isEmpty || _password.text.isEmpty){
+      _showMsg("Correo o contraseña no pueden estar vacíos.");
+    } else {
+      var result = await _firebaseApi.logInUser(_email.text, _password.text);
+      String msg="";
+      if(result=='invalid-email'){
+        msg='El correo electrónico está mal escrito.';
+      } else
+      if(result=='user-not-found'){
+        msg='El usuario/contraseña no existen.';
+      } else
+      if(result=='wrong-password'){
+        msg='El correo o la contraseña son inválidos.';
+      } else
+      if(result=='network-request-failed'){
+        msg='El servicio de internet/datos está fallando.';
+      } else {
+        msg = 'Usuario logeado con éxito.';
+        _showMsg(msg);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      }
+      _showMsg(msg);
+    }
   }
 
   @override
@@ -57,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     textStyle: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                    _validateUser();
                   },
                   child: const Text('Iniciar Sesión'),
                 ),
