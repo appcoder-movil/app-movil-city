@@ -28,7 +28,12 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void saveUser(User user) async {
+  void _saveUser(User user) async {
+    var result=await _firebaseApi.createUser(user);
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+  }
+
+  void _registerUser(User user) async {
     var result=await _firebaseApi.registerUser(user.email, user.password);
     String msg='';
     if(result=='invalid-email'){
@@ -42,8 +47,11 @@ class _RegisterPageState extends State<RegisterPage> {
     }else
     if(result=='network-request-failed'){
       msg='El servicio de internet/datos está fallando.';
-    } else
+    } else {
       msg='Usuario registrado con éxito.';
+      user.uid=result;
+      _saveUser(user);
+    }
 
     _showMessage(msg);
   }
@@ -51,9 +59,9 @@ class _RegisterPageState extends State<RegisterPage> {
   void _onRegisterButtonClicked(){
     setState(() {
       if(_password.text == _confirm_password.text){
-        var user = User(_email.text, _password.text);
-        saveUser(user);
-        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+        var user = User('', _email.text, _password.text);
+        //saveUser(user);
+        _registerUser(user);
       }else{
         _showMessage('Las contraseñas DEBEN ser iguales.');
       }
