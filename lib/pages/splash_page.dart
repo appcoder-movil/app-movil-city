@@ -1,4 +1,6 @@
 import 'package:app_movil_city/pages/login_page.dart';
+import 'package:app_movil_city/pages/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -20,7 +22,13 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _closeSplashPage() async {
     Future.delayed(const Duration(seconds: 2), () async {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+      var currentUser = FirebaseAuth.instance.currentUser;
+      if(currentUser==null){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+      } else {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
+
     });
   }
   @override
