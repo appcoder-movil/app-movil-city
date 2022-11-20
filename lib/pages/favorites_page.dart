@@ -16,6 +16,22 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Favoritos'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+            onPressed: (){
+              setState(() {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+              });
+            },
+          ),
+        ]
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
         child: Center(
@@ -42,11 +58,6 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   onLongPress: (){
                     setState(() {
                       favorite.delete();
-                    });
-                  },
-                  onTap: (){
-                    setState(() {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
                     });
                   },
                 ),

@@ -78,6 +78,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text('Login'),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: Center(

@@ -64,14 +64,10 @@ class _HomePageState extends State<HomePage> {
                 return Card(
                   child: ListTile(
                     onTap: (){
-                      Poi poiSeleccionado = Poi(poi['id'], 'assets/images/'+poi['foto'], poi['nombre'], poi['descripcion'], poi['puntuacion']);
-                      print('=======> Consultando coleccion de sitios turisticos');
-                      print(poi['id']);
-                      print(poi['foto']);
-                      print(poi['nombre']);
-                      print(poi['descripcion']);
-                      print(poi['puntuacion']);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PoiPage(poiSeleccionado)));
+                      setState(() {
+                        Poi poiSeleccionado = Poi(poi['id'], 'assets/images/'+poi['foto'], poi['nombre'], poi['descripcion'], poi['puntuacion']);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PoiPage(poiSeleccionado)));
+                      });
                     },
                     title: Text(poi['nombre']),
                   ),

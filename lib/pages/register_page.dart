@@ -72,6 +72,22 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Registrese'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: (){
+                setState(() {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                });
+              },
+            ),
+          ]
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: Center(

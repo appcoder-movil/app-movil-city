@@ -20,7 +20,6 @@ class _PoiPageState extends State<PoiPage> {
 
   @override
   void initState(){
-    print('===========> Leyendo la base de datos!!!');
     _getLocalFavorite();
     super.initState();
   }
@@ -28,8 +27,6 @@ class _PoiPageState extends State<PoiPage> {
   void _getLocalFavorite(){
     final box = Boxes.getFavoritesBox();
     box.values.forEach((element) {
-      print('===========> element.id ${element.id}');
-      print('===========> widget.poiSeleccionado.id ${widget.poiSeleccionado.id}');
       if(element.id == widget.poiSeleccionado.id){
         isFavorite = true;
       }
@@ -43,16 +40,12 @@ class _PoiPageState extends State<PoiPage> {
       ..puntuacion = widget.poiSeleccionado.puntuacion
       ..foto = widget.poiSeleccionado.foto;
 
-
     final box = Boxes.getFavoritesBox();
-    //box.add(localFavorite);
 
     if(isFavorite){
       box.delete(localFavorite.id);
-      print('=========> Se ha desmarcado este POI como FAVORITO!!!! (${localFavorite.id})');
     } else {
       box.put(localFavorite.id, localFavorite);
-      print('=========> Se ha marcado este POI como FAVORITO!!!! (${localFavorite.id}');
     }
     setState(() {
       isFavorite = !isFavorite;
@@ -63,6 +56,10 @@ class _PoiPageState extends State<PoiPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('POI: '+widget.poiSeleccionado.nombre),
+        actions: [],
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: Center(
@@ -115,15 +112,6 @@ class _PoiPageState extends State<PoiPage> {
                   height: 16.0,
                 ),
                 Text(widget.poiSeleccionado.puntuacion, style: Theme.of(context).textTheme.headline6,),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.blue),
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                  child: const Text('Regresar'),
-                ),
               ],
             ),
           ),
