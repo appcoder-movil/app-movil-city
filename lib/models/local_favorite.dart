@@ -14,4 +14,7 @@ class LocalFavorite extends HiveObject{
   @HiveField(2)
   String? puntuacion;
 
+  @HiveField(3)
+  String? foto;
+
 }

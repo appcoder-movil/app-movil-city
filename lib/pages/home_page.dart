@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-enum Menu {logOut}
+enum Menu {favorites, logOut}
 
 class _HomePageState extends State<HomePage> {
 
@@ -31,10 +31,18 @@ class _HomePageState extends State<HomePage> {
                 if(item==Menu.logOut){
                   FirebaseAuth.instance.signOut();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                } else {
+                  if(item==Menu.favorites){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FavoritesPage()));
+                  }
                 }
               });
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+              const PopupMenuItem(
+                value: Menu.favorites,
+                child: Text('Favoritos'),
+              ),
               const PopupMenuItem(
                 value: Menu.logOut,
                 child: Text('Cerrar sesión'),
@@ -56,8 +64,9 @@ class _HomePageState extends State<HomePage> {
                 return Card(
                   child: ListTile(
                     onTap: (){
-                      Poi poiSeleccionado = Poi('', 'assets/images/'+poi['foto'], poi['nombre'], poi['descripcion'], poi['puntuacion']);
+                      Poi poiSeleccionado = Poi(poi['id'], 'assets/images/'+poi['foto'], poi['nombre'], poi['descripcion'], poi['puntuacion']);
                       print('=======> Consultando coleccion de sitios turisticos');
+                      print(poi['id']);
                       print(poi['foto']);
                       print(poi['nombre']);
                       print(poi['descripcion']);

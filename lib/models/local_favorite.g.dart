@@ -19,19 +19,22 @@ class LocalFavoriteAdapter extends TypeAdapter<LocalFavorite> {
     return LocalFavorite()
       ..id = fields[0] as String?
       ..nombre = fields[1] as String?
-      ..puntuacion = fields[2] as String?;
+      ..puntuacion = fields[2] as String?
+      ..foto = fields[3] as String?;
   }
 
   @override
   void write(BinaryWriter writer, LocalFavorite obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.nombre)
       ..writeByte(2)
-      ..write(obj.puntuacion);
+      ..write(obj.puntuacion)
+      ..writeByte(3)
+      ..write(obj.foto);
   }
 
   @override

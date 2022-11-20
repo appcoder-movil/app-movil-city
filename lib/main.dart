@@ -15,6 +15,7 @@ void main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(LocalFavoriteAdapter());
+  await Hive.openBox<LocalFavorite>('favorites');
 
   runApp(const MyApp());
 }
