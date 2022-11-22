@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "59425761936",
+    "project_id": "appmobilecity-901c7",
+    "storage_bucket": "appmobilecity-901c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59425761936:android:94fa7350a20afdb28ac615",
+        "android_client_info": {
+          "package_name": "com.app_coders_movil.app_movil_city"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59425761936-o5jfueb6oi5fo3j7p3mlehu0k0rdb59f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmxa-mlNU0PKDZSORLIEbryY6BGSTdNSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59425761936-o5jfueb6oi5fo3j7p3mlehu0k0rdb59f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
