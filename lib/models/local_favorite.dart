@@ -12,9 +12,15 @@ class LocalFavorite extends HiveObject{
   String? nombre;
 
   @HiveField(2)
-  String? puntuacion;
+  String? foto;
 
   @HiveField(3)
-  String? foto;
+  String? puntuacion;
+
+  @HiveField(4)
+  String? latitud;
+
+  @HiveField(5)
+  String? longitud;
 
 }

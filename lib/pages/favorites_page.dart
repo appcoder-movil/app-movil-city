@@ -1,5 +1,7 @@
 import 'package:app_movil_city/boxes.dart';
 import 'package:app_movil_city/models/local_favorite.dart';
+import 'package:app_movil_city/models/poi.dart';
+import 'package:app_movil_city/pages/googlemap_page.dart';
 import 'package:app_movil_city/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -54,10 +56,17 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 child: ListTile(
                   leading: Image(image: AssetImage(favorite.foto??"No Photo")),
                   title: Text(favorite.nombre??"No Title"),
-                  subtitle: Text(favorite.puntuacion??"No Punctuation"),
+                  subtitle: Text(favorite.puntuacion.toString()??"No Punctuation"),
                   onLongPress: (){
                     setState(() {
                       favorite.delete();
+                    });
+                  },
+                  onTap: (){
+                    setState(() {
+                      Poi poiFavorito = Poi(favorite.id, favorite.foto, favorite.nombre, '', favorite.puntuacion, favorite.latitud, favorite.longitud);
+                      print('=========> Muestra el mapa!!!! ${poiFavorito.nombre} ${poiFavorito.latitud} ${poiFavorito.longitud}');
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleMapPage(poiFavorito.nombre, poiFavorito.latitud, poiFavorito.longitud)));
                     });
                   },
                 ),

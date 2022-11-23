@@ -1,5 +1,5 @@
 import 'package:app_movil_city/pages/favorites_page.dart';
-import 'package:app_movil_city/pages/geolocalization_page.dart';
+import 'package:app_movil_city/pages/googlemap_page.dart';
 import 'package:app_movil_city/pages/login_page.dart';
 import 'package:app_movil_city/pages/poi_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
           PopupMenuButton(
             onSelected: (Menu item){
               setState(() {
+                print('=========> Creado el Draw!!!');
                 if(item==Menu.logOut){
                   FirebaseAuth.instance.signOut();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
@@ -61,11 +62,13 @@ class _HomePageState extends State<HomePage> {
               itemCount: snapshot.data?.docs.length,
               itemBuilder: (context, index){
                 QueryDocumentSnapshot poi=snapshot.data!.docs[index];
+                print('=========> Creado el objeto desde el box de Hive con el index ${index}!!!');
                 return Card(
                   child: ListTile(
                     onTap: (){
                       setState(() {
-                        Poi poiSeleccionado = Poi(poi['id'], 'assets/images/'+poi['foto'], poi['nombre'], poi['descripcion'], poi['puntuacion']);
+                        Poi poiSeleccionado = Poi(poi['id'], 'assets/images/'+poi['foto'], poi['nombre'], poi['descripcion'], poi['puntuacion'], poi['latitud'], poi['longitud']);
+                        print('=========> Creada la instancia de Poi para pasar a la vista de detalle!!!');
                         Navigator.push(context, MaterialPageRoute(builder: (context) => PoiPage(poiSeleccionado)));
                       });
                     },

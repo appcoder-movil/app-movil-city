@@ -6,23 +6,41 @@ class Poi{
   var _nombre;
   var _descripcion;
   var _puntuacion;
+  var _latitud;
+  var _longitud;
 
-  Poi(this._id, this._foto, this._nombre, this._descripcion, this._puntuacion);
+  Poi(this._id, this._foto, this._nombre, this._descripcion, this._puntuacion, this._latitud, this._longitud);
 
   Poi.fromJson(Map<String, dynamic> json)
     : _id=json['id'],
       _foto=json['foto'],
       _nombre=json['nombre'],
       _descripcion=json['descripcion'],
-      _puntuacion=json['puntuacion'];
+      _puntuacion=json['puntuacion'],
+      _latitud=json['latitud'],
+      _longitud=json['longitud'];
 
   Map<String, dynamic> toJson() => {
   'id':_id,
   'foto':_foto,
   'nombre':_nombre,
   'descripcion':_descripcion,
-  'puntuacion':_puntuacion
+  'puntuacion':_puntuacion,
+  'latitud':_latitud,
+  'longitud':_longitud
   };
+
+  get latitud => _latitud;
+
+  set latitud(value) {
+    _latitud = value;
+  }
+
+  get longitud => _longitud;
+
+  set longitud(value) {
+    _longitud = value;
+  }
 
   get puntuacion => _puntuacion;
 

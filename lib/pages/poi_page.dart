@@ -1,5 +1,4 @@
 import 'package:app_movil_city/models/local_favorite.dart';
-import 'package:app_movil_city/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 import '../boxes.dart';
@@ -7,16 +6,18 @@ import '../models/poi.dart';
 
 class PoiPage extends StatefulWidget {
   final Poi poiSeleccionado;
-  const PoiPage(this.poiSeleccionado, {Key? key}) : super(key: key);
-  //const PoiPage(this.poiSeleccionado);
+  PoiPage(this.poiSeleccionado, {Key? key}) : super(key: key);
 
   @override
-  State<PoiPage> createState() => _PoiPageState();
+  State<PoiPage> createState() => _PoiPageState(poiSeleccionado);
 }
 
 class _PoiPageState extends State<PoiPage> {
+  var poiSeleccionado;
 
   var isFavorite = false;
+
+  _PoiPageState(this.poiSeleccionado);
 
   @override
   void initState(){
@@ -27,7 +28,7 @@ class _PoiPageState extends State<PoiPage> {
   void _getLocalFavorite(){
     final box = Boxes.getFavoritesBox();
     box.values.forEach((element) {
-      if(element.id == widget.poiSeleccionado.id){
+      if(element.id == poiSeleccionado.id){
         isFavorite = true;
       }
     });
@@ -35,10 +36,12 @@ class _PoiPageState extends State<PoiPage> {
 
   void _onFavoriteButtonClicked() async {
     var localFavorite = LocalFavorite()
-      ..id = widget.poiSeleccionado.id
-      ..nombre = widget.poiSeleccionado.nombre
-      ..puntuacion = widget.poiSeleccionado.puntuacion
-      ..foto = widget.poiSeleccionado.foto;
+      ..id = poiSeleccionado.id
+      ..nombre = poiSeleccionado.nombre
+      ..foto = poiSeleccionado.foto
+      ..puntuacion = poiSeleccionado.puntuacion
+      ..latitud = poiSeleccionado.latitud
+      ..longitud = poiSeleccionado.longitud;
 
     final box = Boxes.getFavoritesBox();
 
@@ -57,7 +60,7 @@ class _PoiPageState extends State<PoiPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('POI: '+widget.poiSeleccionado.nombre),
+        title: Text('POI: '+poiSeleccionado.nombre),
         actions: [],
       ),
       body: Padding(
@@ -74,11 +77,11 @@ class _PoiPageState extends State<PoiPage> {
                 const SizedBox(
                   height: 16.0,
                 ),
-                Text(widget.poiSeleccionado.nombre, style: Theme.of(context).textTheme.headline3,),
+                Text(poiSeleccionado.nombre, style: Theme.of(context).textTheme.headline3,),
                 const SizedBox(
                   height: 16.0,
                 ),
-                Image(image: AssetImage(widget.poiSeleccionado.foto)),
+                Image(image: AssetImage(poiSeleccionado.foto)),
                 const SizedBox(
                   height: 16.0,
                 ),
@@ -103,15 +106,22 @@ class _PoiPageState extends State<PoiPage> {
                 const SizedBox(
                   height: 16.0,
                 ),
-                Text(widget.poiSeleccionado.descripcion, style: Theme.of(context).textTheme.headline6,),
+                Text(poiSeleccionado.descripcion, style: Theme.of(context).textTheme.headline6,),
                 const SizedBox(
                   height: 16.0,
                 ),
-                Text('Puntuación', style: Theme.of(context).textTheme.headline5,),
+                Text('Puntuación: '+poiSeleccionado.puntuacion, style: Theme.of(context).textTheme.headline5,),
                 const SizedBox(
                   height: 16.0,
                 ),
-                Text(widget.poiSeleccionado.puntuacion, style: Theme.of(context).textTheme.headline6,),
+                Text('Latitud: '+poiSeleccionado.latitud, style: Theme.of(context).textTheme.headline5,),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Text('Longitud: '+poiSeleccionado.longitud, style: Theme.of(context).textTheme.headline5,),
+                const SizedBox(
+                  height: 16.0,
+                ),
               ],
             ),
           ),
